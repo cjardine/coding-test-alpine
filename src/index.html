@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coding Test in Alpine JS</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<main x-data="{images: [], currentPage: 1, pageLength: 6}"
+    x-init="getImages(currentPage, pageLength)
+        .then(output => {
+            images.length = 0;
+            images.push(...output);
+    })">
+    <ul>
+        <template x-for="image in images" :key="image.url">
+            <li>
+                <img x-bind:alt="image.alt" x-bind:src="image.url"/>
+            </li>
+        </template>
+    </ul>
+    <div class="tool-bar">
+        <button @click="
+            currentPage++;
+            getImages(currentPage, pageLength)
+                .then(output => {
+                    images.length = 0;
+                    images.push(...output);
+                })">
+            Generate
+        </button>
+    </div>
+</main>
+
+<script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+<script>
+    const imageUrl = (id) => `https://picsum.photos/id/${id}/300/300`;
+
+    async function getImages(currentPage, pageLength) {
+        const imageResponseBlob = await fetch(`https://picsum.photos/v2/list?page=${currentPage}&limit=${pageLength}`)
+        const imageResponse = await imageResponseBlob.json();
+        return imageResponse.map(image => {
+            return {
+                url: imageUrl(image.id),
+                alt: image.author
+            }
+        });
+    }
+</script>
+</body>
+</html>

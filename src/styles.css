@@ -1,0 +1,58 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 800px;
+    column-gap: 12px;
+    row-gap: 12px;
+
+}
+
+li {
+    list-style: none;
+}
+
+img {
+    width: 100%;
+    display: block;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    overflow: hidden;
+    animation-name: fadeIn;
+    animation-fill-mode: both;
+    animation-duration: 0.3s;
+}
+
+@media (max-width: 600px) {
+    ul {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 0 auto;
+        padding: 0;
+        column-gap: 20px;
+        row-gap: 20px;
+
+    }
+}
+
+.tool-bar {
+    margin: 70px auto;
+    padding: 70px;
+    border-top: 1px solid #dadada;
+    width: auto;
+}
+
+button {
+    padding: 10px 20px;
+    border: transparent 1px solid;
+    border-radius: 4px;
+    background-color: #00aaee;
+    color: white;
+}
